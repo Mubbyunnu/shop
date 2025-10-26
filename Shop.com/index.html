@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MYStore</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <i class="fa-brands fa-instagram"></i>
+
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🛍️ MYStore</div>
+    <nav>
+      <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to MYStore</h1>
+    <p>Get your favorite Gadgets & Fashion here!</p>
+  </section>
+
+  <!-- Search Bar -->
+  <section class="search-bar">
+    <input type="text" id="search-input" placeholder="Search items..." onkeyup="searchSubjects()">
+  </section>
+
+  <main>
+    <h2>🛍️ Products</h2>
+    <div class="products"></div>
+  </main>
+
+  <script>
+    // Product List
+    const subjects = [
+      { name: "Bluetooth Speaker", price: 1999, img: "images/big size speaker.png" },
+      { name: "Hp Laptop", price: 999, img: "images/hp laptop.png" },
+      { name: "T-Shirt", price: 499, img: "images/T shirt.png" },
+      { name: "Formal Pants", price: 699, img: "images/formal pant.png" },
+      { name: "iPhone 17 Pro Max", price: 102499, img: "images/iphone 17 pro max.png" }
+    ];
+
+    // Display Products
+    const container = document.querySelector(".products");
+    subjects.forEach(sub => {
+      container.innerHTML += `
+        <div class="product-card">
+          <img src="${sub.img}" alt="${sub.name}">
+          <h3>${sub.name}</h3>
+          <p>₹${sub.price}</p>
+          <button onclick="addToCart('${sub.name}', ${sub.price}, '', '', '${sub.img}')">Add to Cart</button>
+        </div>
+      `;
+    });
+
+    // Search Function
+    function searchSubjects() {
+      const input = document.getElementById("search-input").value.toLowerCase();
+      document.querySelectorAll(".product-card").forEach(card => {
+        const title = card.querySelector("h3").innerText.toLowerCase();
+        card.style.display = title.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
